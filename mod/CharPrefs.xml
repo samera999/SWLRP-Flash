@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?> 
+<Root>
+  <Value name="SWLRP" value="true" />
+  <Value name="SWLRP_X" value="-1" />
+  <Value name="SWLRP_Y" value="0" />
+
+
+</Root>
+
+	  <Archive name="SWLRP_Cfg" />
+	    <Double name="WindowY" value="0.000000" />
+        <Double name="WindowX" value="0.000000" />
+</Archive>
+	
