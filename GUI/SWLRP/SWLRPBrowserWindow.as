@@ -7,11 +7,11 @@ import com.Utils.Signal;
 import com.GameInterface.CharacterData;
 import com.GameInterface.Targeting;
 import com.GameInterface.Game.Character;
+import com.GameInterface.Game.CharacterBase;
 
 class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 {
 	static var SignalShowSWLRPWindow = new com.Utils.Signal(); //The signal which runs two functions.
-	
 	
 	
 	
@@ -20,7 +20,8 @@ class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 		super();
 		SignalShowSWLRPWindow.Connect(showSWLRPWindow, this); // Sets a signal to run when called.
 		Main.Version = "1.0"; //Current Version
-
+		CharacterBase.SignalCharacterEnteredReticuleMode.Connect(SlotEnteredReticuleMode, this);
+		
 	}
 	
 	function configUI()
@@ -67,6 +68,14 @@ class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 	
      
 }
+
+function SlotEnteredReticuleMode()
+{
+	removeMovieClip();
+	m_Window = null;
+	Main.WindowOpen = false;
+}
+
    function onUnload()
    {
       super.onUnload();

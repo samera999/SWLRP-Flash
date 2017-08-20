@@ -15,14 +15,18 @@ import com.GameInterface.Browser.Browser;
 import com.GameInterface.CharacterData;
 import com.GameInterface.Chat;
 import com.GameInterface.DistributedValue;
+import com.GameInterface.Tooltip.TooltipData;
 import com.Utils.ImageLoader;
 import gfx.controls.UILoader;
 import mx.utils.Delegate;
 import com.Components.WinComp;
 import com.Utils.Signal;
 import com.GameInterface.Game.Character; 
+import com.GameInterface.Game.CharacterBase;
 import com.Utils.GlobalSignal;
 import com.Utils.Archive;
+import com.GameInterface.Tooltip.TooltipInterface;
+import com.GameInterface.Tooltip.TooltipManager;
 
 class Main 
 {
@@ -31,7 +35,7 @@ class Main
 	public static var _Flash; //So we can manipulate the swfRoot in other functions without having to pass it all over the place
 	public static var GUILocked:Boolean; //To record if the gui lock toggle is on or off.
 	static public var Version:String; //For Version Number
-	
+	public static var m_Tooltip:TooltipInterface;
 	
 	public static function main(swfRoot:MovieClip):Void 
 	{
@@ -39,6 +43,7 @@ class Main
 		_Flash = MovieClip(swfRoot); 
 		var swl = new Main(swfRoot); //getting out of the main entry point.
 		Version = "1.0";
+		
 	}
 	
 	
@@ -61,10 +66,12 @@ class Main
 		
 		var FullScreenWidth = Stage["visibleRect"].width;
 		
+		CharacterBase.SignalCharacterEnteredReticuleMode.Connect(SlotEnteredReticuleMode, swfRoot);
 		//Check the X value is past the window on either side
+		
 		if (SWLWindow_x.GetValue() > FullScreenWidth || SWLWindow_x.GetValue()<0)
 		{
-			Button_Container._x = FullScreenWidth - Button_Container._width - 250;
+			Button_Container._x = FullScreenWidth - Button_Container._width - 265; // 265 accounts for lock, clock, signal, AP, SP, and mail icons.
 			SWLWindow_x.SetValue(Button_Container._x);
 			SWLWindow_y.SetValue(0);
 		}
@@ -110,9 +117,43 @@ class Main
 			SWLWindow_x.SetValue(Button_Container._x);
 			SWLWindow_y.SetValue(Button_Container._y);
 		}
+		
+		RPButton.onRollOver = function() //Tooltip
+		{
+			if (Main.m_Tooltip != undefined)
+        {
+            Main.m_Tooltip.Close();
+        }
+        
+        var tooltipData:TooltipData = new TooltipData();
+        tooltipData.m_Descriptions.push("SWLRP Add-On v"+ Main.Version);
+        tooltipData.m_Padding = 4;
+        tooltipData.m_MaxWidth = 150;
+        
+        Main.m_Tooltip = TooltipManager.GetInstance().ShowTooltip(undefined, TooltipInterface.e_OrientationVertical, DistributedValue.GetDValue("HoverInfoShowDelay"), tooltipData);
+		}
+		
+		RPButton.onRollOut = function() //Tooltip close
+		{
+			if (Main.m_Tooltip != undefined)
+			{
+			Main.m_Tooltip.Close();
+			}
+		}
+		
 				
 		Mouse.addListener(RPButton);
 	}
+	function SlotEnteredReticuleMode()
+	{
+			if (Main.m_Tooltip != undefined)
+			{
+			Main.m_Tooltip.Close();
+			}
+				
+	}
+	
+	
 	
 	 function showSWLWindow(m_CharID)
 	{
