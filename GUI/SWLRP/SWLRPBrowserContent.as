@@ -33,14 +33,15 @@ class GUI.SWLRP.SWLRPBrowserContent extends com.Components.WindowComponentConten
 	if (Character.GetCharacter(Char).IsClientChar())
 	{
 		//For editing: https://profile.swlrp.com/edit/12345?first=Chuck&nick=TexasRanger&last=Norris
-		this.m_Browser.OpenURL("http://profile.swlrp.com/edit/" + CharID+ "?first=" + FName + "&nick=" + Nic + "&last="+ LName +"&clientVer=" + Main.Version); //Live
-		//this.m_Browser.OpenURL("http://swlrp.incertitu.de/edit/" + CharID+ "?first=" + FName + "&nick=" + Nic + "&last="+ LName +"&clientVer=" + Main.Version); //Testing
+		this.m_Browser.OpenURL("http://profile.swlrp.com/edit/" + CharID+ "?first=" + FName + "&nick=" + Nic + "&last="+ LName +"&clientVer=" + MainSWLRP.Version); //Live
+		//this.m_Browser.OpenURL("http://swlrp.incertitu.de/edit/" + CharID + "?first=" + FName + "&nick=" + Nic + "&last=" + LName +"&clientVer=" + MainSWLRP.Version); //Testing
+		
 	}
 	else if (Character.GetCharacter(Char).GetID().IsPlayer())
 	{
 		//For viewing: https://profile.swlrp.com/view/12345?nick=TexasRanger
-		this.m_Browser.OpenURL("http://profile.swlrp.com/view/" + CharID+ "?nick=" + Nic + "&clientVer=" + Main.Version); //Live
-		//this.m_Browser.OpenURL("http://swlrp.incertitu.de/view/" + CharID+ "?nick=" + Nic + "&clientVer=" + Main.Version); //Testing
+		this.m_Browser.OpenURL("http://profile.swlrp.com/view/" + CharID+ "?nick=" + Nic + "&clientVer=" + MainSWLRP.Version); //Live
+		//this.m_Browser.OpenURL("http://swlrp.incertitu.de/view/" + CharID+ "?nick=" + Nic + "&clientVer=" + MainSWLRP.Version); //Testing
     }
 	//Loading the web page content into the window as "content"
 	  this.m_Loader.loadMovie("img://browsertexture/" + this.m_Browser.GetBrowserName());

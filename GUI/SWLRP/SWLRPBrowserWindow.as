@@ -19,7 +19,6 @@ class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 	{
 		super();
 		SignalShowSWLRPWindow.Connect(showSWLRPWindow, this); // Sets a signal to run when called.
-		Main.Version = "1.0"; //Current Version
 		CharacterBase.SignalCharacterEnteredReticuleMode.Connect(SlotEnteredReticuleMode, this);
 		
 	}
@@ -35,6 +34,7 @@ class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 		
 		//Title is First name "Nick" Last name
 		SetTitle(Character.GetCharacter(m_CharID).GetFirstName() + " \"" + Character.GetCharacter(m_CharID).GetName() + "\" " + Character.GetCharacter(m_CharID).GetLastName());
+		//SetTitle(Character.GetCharacter(m_CharID).GetFirstName() + " \"" + Character.GetCharacter(m_CharID).GetName() + "\" " + Character.GetCharacter(m_CharID).GetLastName() + " TESTING");
 		var visibleRect = Stage["visibleRect"];
 		_x = visibleRect.x;
 		_y = visibleRect.y;
@@ -64,7 +64,7 @@ class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 {
 	removeMovieClip();
 	m_Window = null;
-	Main.WindowOpen = false;
+	MainSWLRP.WindowOpen = false;
 	
      
 }
@@ -73,7 +73,7 @@ function SlotEnteredReticuleMode()
 {
 	removeMovieClip();
 	m_Window = null;
-	Main.WindowOpen = false;
+	MainSWLRP.WindowOpen = false;
 }
 
    function onUnload()
