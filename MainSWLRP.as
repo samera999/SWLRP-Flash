@@ -4,7 +4,6 @@
  * @author Spellsmith - Front End Website
  */
 
-import GUI.Achievement.AchievementItem;
 import GUI.SWLRP.SWLRPBrowserContent;
 import GUI.SWLRP.SWLRPBrowserWindow;
 import com.Components.Window;
@@ -28,6 +27,7 @@ import com.Utils.Archive;
 import com.GameInterface.Tooltip.TooltipInterface;
 import com.GameInterface.Tooltip.TooltipManager;
 
+
 class MainSWLRP 
 {
 		
@@ -36,13 +36,19 @@ class MainSWLRP
 	public static var GUILocked:Boolean; //To record if the gui lock toggle is on or off.
 	static public var Version:String; //For Version Number
 	public static var m_Tooltip:TooltipInterface;
-	
+		
 	public static function main(swfRoot:MovieClip):Void 
 	{
 		//Entry point
 		_Flash = MovieClip(swfRoot); 
 		var swl = new MainSWLRP(swfRoot); //getting out of the main entry point.
-		Version = "1.0.1"; //Current Version
+		Version = "1.0.2"; //Current Version
+		//swfRoot.OnModuleActivated = function(archive:Archive){
+			//This wokrs!
+		//}
+		//swfRoot.onModuleDeactivated = function(){
+		
+		//}
 		
 	}
 	
@@ -63,6 +69,8 @@ class MainSWLRP
 		
 		var SWLWindow_x:DistributedValue = DistributedValue.Create("SWLRP_X");
 		var SWLWindow_y:DistributedValue = DistributedValue.Create("SWLRP_Y");
+		var SWLRP_Debug:DistributedValue = DistributedValue.Create("SWLRP_Debug");
+		SWLRP_Debug.SetValue(false);
 		
 		var FullScreenWidth = Stage["visibleRect"].width;
 		
@@ -84,6 +92,7 @@ class MainSWLRP
 	
 		GUILocked = true;
 		
+
 		//for when you press the RP button at the top of the screen
 		RPButton.onRelease = function()
 		{
@@ -185,7 +194,6 @@ class MainSWLRP
 			GUILocked = true;
 		}
 	}
-	
 	
 	public static var WindowOpen; //Tells if the window is open or not.  Could make bool.  Should make bool.
 	var m_Window:SWLRPBrowserWindow;

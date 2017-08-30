@@ -3,6 +3,7 @@
   <Value name="SWLRP" value="true" />
   <Value name="SWLRP_X" value="-1" />
   <Value name="SWLRP_Y" value="0" />
+  <Value name="SWLRP_Debug" value="false" />
 
 
 </Root>

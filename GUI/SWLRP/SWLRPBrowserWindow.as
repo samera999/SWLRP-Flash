@@ -8,6 +8,8 @@ import com.GameInterface.CharacterData;
 import com.GameInterface.Targeting;
 import com.GameInterface.Game.Character;
 import com.GameInterface.Game.CharacterBase;
+import com.Utils.Archive;
+
 
 class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 {
@@ -32,9 +34,18 @@ class GUI.SWLRP.SWLRPBrowserWindow extends com.Components.WinComp
 	{
 		super.configUI();
 		
+		var SWLRP_Debug:DistributedValue = DistributedValue.Create("SWLRP_Debug"); //Check Debug value
 		//Title is First name "Nick" Last name
+		
+		if (SWLRP_Debug.GetValue())
+		{
+			SetTitle(Character.GetCharacter(m_CharID).GetFirstName() + " \"" + Character.GetCharacter(m_CharID).GetName() + "\" " + Character.GetCharacter(m_CharID).GetLastName() + " TESTING");
+		}
+		else 
+		{
 		SetTitle(Character.GetCharacter(m_CharID).GetFirstName() + " \"" + Character.GetCharacter(m_CharID).GetName() + "\" " + Character.GetCharacter(m_CharID).GetLastName());
-		//SetTitle(Character.GetCharacter(m_CharID).GetFirstName() + " \"" + Character.GetCharacter(m_CharID).GetName() + "\" " + Character.GetCharacter(m_CharID).GetLastName() + " TESTING");
+		}
+		
 		var visibleRect = Stage["visibleRect"];
 		_x = visibleRect.x;
 		_y = visibleRect.y;
